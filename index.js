@@ -1,6 +1,6 @@
 var path               = require('path'),
     sourceMapSupport   = require('source-map-support'),
-    babelRegisterCache = require('babel-register/lib/cache');
+    babelRegisterCache = require('@babel/register/lib/cache');
 
 module.exports = function(sails) {
 
@@ -21,7 +21,7 @@ module.exports = function(sails) {
         // Doesn't import polyfill by default
         polyfill: false,
         // Activates preset tranformations
-        presets: ['es2015']
+        presets: ['@babel/preset-env']
       }
     },
 
@@ -70,13 +70,13 @@ module.exports = function(sails) {
         }
 
         if (config.polyfill) {
-          require('babel-polyfill');
+          require('@babel/polyfill');
         }
 
         delete config.polyfill;
         delete config.compile;
 
-        require('babel-register')(config);
+        require('@babel/register')(config);
 
         sails.log.verbose('Babel hook activated. Enjoy ES6/7 power in your Sails app.');
       }
